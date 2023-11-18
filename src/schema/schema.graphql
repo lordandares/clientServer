@@ -1,0 +1,29 @@
+type Query
+type Mutation
+
+type Client {
+  id: ID!
+  firstName: String!
+  lastName: String!
+  email: String!
+  events: [Event]
+}
+ 
+extend type Query {
+  queryClientList: [Client!]
+}
+
+extend type Query {
+  findClientById(id: ID!): Client!
+}
+ 
+type Event {
+  id: ID!
+  title: String!
+  startDateTime: String!
+}
+
+extend type Mutation {
+  deleteClient(id: ID!): Boolean
+  # Add more mutation fields as needed
+}

@@ -1,6 +1,6 @@
 import type { AWS } from '@serverless/typescript';
 
-import hello from '@functions/graphql';
+import graphql from '@functions/graphql';
 
 const serverlessConfiguration: AWS = {
   service: 'clientserver',
@@ -19,7 +19,7 @@ const serverlessConfiguration: AWS = {
     },
   },
   // import the function via paths
-  functions: { hello },
+  functions: { graphql },
   package: { individually: true },
   custom: {
     esbuild: {
