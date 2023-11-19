@@ -3,15 +3,15 @@ import { data } from "../data/data";
 
 export const resolvers: Resolvers = {
   Query: {
-    findClientById: (parent, args) => {
+    findClientById: (_parent, args) => {
       return data.find(client => client.id === args.id);
     },
-    queryClientList: (parent, args) => {
+    queryClientList: () => {
         return data;
     }
   },
   Mutation: {
-    deleteClient: (parent, args) => {
+    deleteClient: () => {
         return true;
     }
   },
