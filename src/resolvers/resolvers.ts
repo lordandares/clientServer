@@ -1,14 +1,10 @@
 import { Resolvers } from "./resolvers-types";
-import { data } from "../data/data";
+import { getClientbyId, getclientList } from "../services/ClientService";
 
 export const resolvers: Resolvers = {
   Query: {
-    findClientById: (_parent, args) => {
-      return data.find(client => client.id === args.id);
-    },
-    queryClientList: () => {
-        return data;
-    }
+    findClientById: (_parent, args) => getClientbyId(args.id),
+    queryClientList: () => getclientList()
   },
   Mutation: {
     deleteClient: () => {

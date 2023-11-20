@@ -1,0 +1,45 @@
+//Localhost Url http://localhost:3000/dev/graphql
+
+
+// Copy this section to postman scripts in a graphql request
+pm.test('Query is successful', function () {
+  pm.response.to.be.ok;
+});
+
+pm.test('Response time is below 200ms', function () {
+  pm.response.to.have.responseTime.below(200);
+});
+
+pm.test('Response has expected property', function () {
+  pm.expect(pm.response.data).to.have.property("foo", "bar")
+});
+
+pm.test('Response has expected property', function () {
+  // Parse the response JSON to access properties
+  const responseBody = pm.response.json();
+
+  // Check if the response has the expected property "data.findClientById"
+  pm.expect(responseBody).to.have.property("data");
+  pm.expect(responseBody.data).to.have.property("findClientById");
+
+  // Access properties within "data.findClientById"
+  const clientData = responseBody.data.findClientById;
+
+  // Assert specific properties within "data.findClientById"
+  pm.expect(clientData).to.have.property("id");
+  pm.expect(clientData).to.have.property("firstName");
+  pm.expect(clientData).to.have.property("lastName");
+  pm.expect(clientData).to.have.property("email");
+  pm.expect(clientData).to.have.property("events");
+
+  // If "events" is an array, you can assert properties within each event
+  if (Array.isArray(clientData.events)) {
+      clientData.events.forEach((event) => {
+          pm.expect(event).to.have.property("id");
+          pm.expect(event).to.have.property("title");
+          pm.expect(event).to.have.property("startDateTime");
+      });
+  }
+  // Adjust the property names and structure based on your GraphQL query
+});
+
